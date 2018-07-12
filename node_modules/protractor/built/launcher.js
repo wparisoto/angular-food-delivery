@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * The launcher is responsible for parsing the capabilities from the
  * input configuration and launching test runners.

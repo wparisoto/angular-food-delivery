@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const configParser_1 = require("./configParser");
 /**
  * The taskScheduler keeps track of the spec files that needs to run next

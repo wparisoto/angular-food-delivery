@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /*
  * This is an implementation of the Browserstack Driver Provider.
  * It is responsible for setting up the account object, tearing

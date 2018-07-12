@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const child_process = require("child_process");
 const events_1 = require("events");
 const q = require("q");

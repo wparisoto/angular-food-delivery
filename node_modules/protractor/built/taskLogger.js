@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const os = require("os");
 const logger_1 = require("./logger");
 let logger = new logger_1.Logger('testLogger');

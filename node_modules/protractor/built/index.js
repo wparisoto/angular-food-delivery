@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 // Re-export selenium-webdriver types.
 var selenium_webdriver_1 = require("selenium-webdriver");
 exports.ActionSequence = selenium_webdriver_1.ActionSequence;
@@ -30,6 +31,8 @@ var locators_1 = require("./locators");
 exports.ProtractorBy = locators_1.ProtractorBy;
 var ptor_1 = require("./ptor");
 exports.Ptor = ptor_1.Ptor;
+var runner_1 = require("./runner");
+exports.Runner = runner_1.Runner;
 exports.utils = {
     firefox: require('selenium-webdriver/firefox'),
     http: require('selenium-webdriver/http'),

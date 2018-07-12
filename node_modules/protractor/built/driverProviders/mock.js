@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /*
  * This is an mock implementation of the Driver Provider.
  * It returns a fake webdriver and never actually contacts a selenium
