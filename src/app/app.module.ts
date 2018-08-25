@@ -18,7 +18,7 @@ import { ReviewsComponent } from './restaurant-details/reviews/reviews.component
 
 import { OrderSumaryComponent } from './order-sumary/order-sumary.component';
 import { SharedModule } from './shared/shared.module';
-import { CoreModule } from './core/core.module';
+
 
 
 @NgModule({
