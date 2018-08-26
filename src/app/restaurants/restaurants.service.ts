@@ -14,9 +14,9 @@ import { MenuItem } from '../restaurant-detail/menu-item/menu-tem.model';
 export class RestaurantsService {
   constructor(private http: Http) {}
 
-  restaurants(): Observable<Restaurant[]> {
+  restaurants(search?: string): Observable<Restaurant[]> {
     return this.http
-      .get(`${MEAT_API}/restaurants`)
+      .get(`${MEAT_API}/restaurants`, {params: {q: search}})
       .map(res => res.json())
       .catch(ErroHandler.handleError);
   }
