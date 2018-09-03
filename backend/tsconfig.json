@@ -1,0 +1,16 @@
+//usar esse comando... se não gerar a pasta dist é por que não está compilando 
+//npm install -g typescript 
+// depois rodar tsc -w
+//deve gerar a pasta dist dentro de /backend
+
+//pacote para monitorar as mudanças em tempo de dev e recompilar o diretorio: npm install nodemon -g
+//registrar: nodemon --watch backend backend/dist/server.js
+
+
+
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+        "outDir": "dist"
+    }
+}
