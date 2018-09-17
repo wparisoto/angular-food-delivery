@@ -1,17 +1,26 @@
 import { Request, Response } from 'express';
+import { User, users } from './users';
+import * as jwt 'jsonwebtoken';
 
 export const handleAuthentication = (request: Request, response: Response) => {
-    const user = request.body
+    const user: User = request.body
 
-    response.status(403).json({message: 'Dados inválidos'})
+    if(isValid(user)){
+        const dbUser = users[user.email]
+        const token = jwt.sign({sub: dbUser.email, iss: 'meat-api'}, 'meat-api-password')
 
-    // if(isValid(user)){
         
-    // }else{
-    //     response.status(403).json({message: 'Dados inválidos'})
-    // }
+        response.json({name: dbUser.name, email: dbUser.email, accessToken: token})
+
+    }else{
+        response.status(403).json({message: 'Dados inválidos'})
+    }
 }
 
-function isValid(user): boolean{
-    return false;
+function isValid(user: User): boolean{
+    if(!user){
+        return false
+    }
+    const dbUser = users[user.email]
+    return dbUser !== undefined && dbUser.matches(user)
 }
