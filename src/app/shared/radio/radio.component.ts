@@ -6,7 +6,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   selector: 'mt-radio',
   templateUrl: './radio.component.html',
   styleUrls: ['./radio.component.css'],
-  providers:[
+  providers: [
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => RadioComponent),
@@ -26,7 +26,7 @@ export class RadioComponent implements OnInit, ControlValueAccessor {
   ngOnInit() {
   }
 
-  setValue(value: any){
+  setValue(value: any) {
     this.value = value;
     this.onChange(this.value);
   }

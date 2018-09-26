@@ -20,13 +20,16 @@ export class OrderComponent implements OnInit {
 
   delivery: number = 8
 
-paymentOptions: RadioOption[]=[
-  {label: 'Dinheiro', value:'MON'},
-  {label: 'Cartão Débito', value:'DEB'},
-  {label: 'Cartão Refeição', value:'REF'}
-]
+  paymentOptions: RadioOption[] = [
+    {label: 'Dinheiro', value: 'MON'},
+    {label: 'Cartão Débito', value: 'DEB'},
+    {label: 'Cartão Refeição', value: 'REF'}
+  ]
 
-  constructor(private orderService: OrderService, private router: Router, private formBuilder: FormBuilder) { }
+  constructor(
+    private orderService: OrderService,
+    private router: Router,
+    private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.orderForm = this.formBuilder.group({
@@ -44,8 +47,12 @@ paymentOptions: RadioOption[]=[
     const email = group.get('email')
     const emailConfirmation = group.get('emailConfirmation')
 
+    if(!email || !emailConfirmation){
+        return undefined
+    }
+
     if(email.value !== emailConfirmation.value){
-      return {emailNotMatch: true}
+      return {emailsNotMatch: true}
     }
     return undefined
   }
