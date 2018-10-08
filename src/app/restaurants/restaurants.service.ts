@@ -7,7 +7,6 @@ import { Restaurant } from './restaurant/restaurant.model';
 import { HttpClientModule, HttpClient, HttpParameterCodec, HttpParams } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import { ErroHandler } from '../ErroHandler';
 import { MenuItem } from '../restaurant-detail/menu-item/menu-tem.model';
 
 @Injectable()
