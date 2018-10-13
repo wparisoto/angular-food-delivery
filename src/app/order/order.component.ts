@@ -4,8 +4,8 @@ import { OrderService } from './order.service';
 import { CartItem } from '../restaurant-details/shopping-cart/CartItem';
 import { Order, OrderItem } from './order.model';
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
-import 'rxjs/add/operator/do'
+import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from '@angular/forms';
+import {tap} from 'rxjs/operators'
 
 @Component({
   selector: 'mt-order',
@@ -33,15 +33,17 @@ export class OrderComponent implements OnInit {
     private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    this.orderForm = this.formBuilder.group({
-      name: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
+    this.orderForm = new FormGroup({
+      name: new FormControl('', {
+        validators: [Validators.required, Validators.minLength(5)]
+      }),
       email: this.formBuilder.control('', [Validators.required, Validators.pattern(this.emailPattern)] ),
       emailConfirmation: this.formBuilder.control('', [Validators.required, Validators.pattern(this.emailPattern)]),
       address: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
       number: this.formBuilder.control('', [Validators.required, Validators.pattern(this.numberPatternt)]),
       optionalAddress: this.formBuilder.control(''),
       paymentOption: this.formBuilder.control('', [Validators.required])
-    }, {validator: OrderComponent.equalsTo})
+    }, {validators: [OrderComponent.equalsTo], updateOn: 'change' })
   }
 
   static equalsTo(group: AbstractControl): {[key: string]: boolean}{
@@ -58,41 +60,42 @@ export class OrderComponent implements OnInit {
     return undefined
   }
 
-  itemsValue(): number{
+  itemsValue(): number {
     return this.orderService.itemsValue()
   }
 
-  cartItems(): CartItem[]{
+  cartItems(): CartItem[] {
     return this.orderService.cartItems()
   }
 
-  increaseQty(item: CartItem){
+  increaseQty(item: CartItem) {
     this.orderService.increaseQty(item)
   }
 
-  decreaseQty(item: CartItem){
+  decreaseQty(item: CartItem) {
     this.orderService.decreaseQty(item)
   }
 
-  remove(item: CartItem){
+  remove(item: CartItem) {
     this.orderService.remove(item)
   }
 
-  isOrderCompleted(): boolean{
+  isOrderCompleted(): boolean {
     return this.orderId !== undefined
   }
 
-  checkOrder(order: Order){
+  checkOrder(order: Order) {
     order.orderItems = this
       .cartItems()
       .map((item: CartItem) => new OrderItem(item.quantity, item.menuItem.id))
 
     this.orderService
       .checkOrder(order)
-      .do((orderId: string) => {
-        this.orderId = orderId
-      })
-      .subscribe((orderId: string) => {
+      .pipe(
+        tap((orderId: string) => {
+          this.orderId = orderId
+        })
+      ).subscribe((orderId: string) => {
         this.router.navigate(['/order-sumary']);
         console.log(`Compra Concluida: ${orderId}`)
         this.orderService.clear()
